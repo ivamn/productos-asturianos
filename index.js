@@ -52,4 +52,4 @@ app.use('/', publico);
 app.use('/admin', admin);
 app.use('/auth', auth);
 
-app.listen(80);
+app.listen(8080);
