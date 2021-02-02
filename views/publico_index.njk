@@ -1,0 +1,23 @@
+{% extends "publico_base.njk" %}
+
+{% block titulo %}Productos | Index{% endblock %}
+
+{% block contenido %}
+    <form action="/buscar" method="get" class="mb-3">
+        <div class="form-group">
+            <input type="text" class="form-control" name="q" placeholder="Buscador de productos..."/>
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+    {% if productos %}
+        <ul style="list-style-type: none">
+            {% for producto in productos %}
+                <li>
+                    <a href="/producto/{{ producto.id }}">{{ producto.nombre }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <h4>No se encontraron resultados</h4>
+    {% endif %}
+{% endblock %}

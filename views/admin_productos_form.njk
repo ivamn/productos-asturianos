@@ -1,0 +1,35 @@
+{% extends "admin_base.njk" %}
+
+{% block titulo %}Administración | Formulario{% endblock %}
+
+{% block contenido %}
+    <form action="/admin/productos/{{ producto.id if producto else '' }}?_method={{ 'PUT' if producto }}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombre" value="{{ producto.nombre if producto else '' }}"/>
+        </div>
+        <div class="form-group">
+            <label for="precio">Precio</label>
+            <input type="text" class="form-control" name="precio" id="precio" placeholder="Precio" value="{{ producto.precio if producto else 0 }}"/>
+        </div>
+        <div class="form-group">
+            <label for="precio">Descripción</label>
+            <textarea class="form-control" name="descripcion" id="descripcion" placeholder="Descripción">{{ producto.descripcion if producto else '' }}</textarea>
+        </div>
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="imagen" name="imagen">
+            <label class="custom-file-label" for="imagen">Imagen</label>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">Enviar</button>
+    </form>
+
+    {% if producto %}
+        <form action="/admin/comentarios/{{producto.id}}" method="post" class="mt-4">
+            <div class="form-group">
+                <label for="comentario">Comentario</label>
+                <textarea class="form-control" name="comentario" id="comentario" placeholder="Comentario"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Añadir comentario</button>
+        </form>
+    {% endif %}
+{% endblock %}
