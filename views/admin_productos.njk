@@ -17,6 +17,7 @@
                 </td>
                 <td>
                     <a class="btn btn-primary" href="/admin/productos/editar/{{ producto.id }}">Editar</a>
+                    <a class="btn btn-secondary" href="/admin/productos/comentar/{{ producto.id }}">Comentar</a>
                     <form style="display:inline" action="/admin/productos/{{ producto.id }}?_method=DELETE" method="post">
                         <button type="submit" class="btn btn-danger">Borrar</button>
                     </form>

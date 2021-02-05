@@ -48,6 +48,18 @@ router.get("/productos/editar/:id", auth, (req, res) => {
     });
 });
 
+router.get("/productos/comentar/:id", auth, (req, res) => {
+    Producto.findById(req.params.id).then(resultado => {
+        if (resultado) {
+            res.render('admin_productos_comment', { producto: resultado });
+        } else {
+            res.render('admin_error', { error: 'No se puede comentar en un producto no encontrado' });
+        }
+    }).catch(error => {
+        res.render('admin_error');
+    });
+});
+
 router.post("/productos", auth, upload.single('imagen'), (req, res) => {
 
     if (!req.body.nombre || !req.body.precio || !req.body.descripcion || !req.file) {
@@ -103,10 +115,10 @@ router.post("/comentarios/:idProducto", auth, (req, res) => {
         }, { new: true }).then(resultado => {
             res.redirect(req.baseUrl);
         }).catch(error => {
-            res.render('admin_error', {error: error});
+            res.render('admin_error', { error: error });
         });
     }).catch(error => {
-        res.render('admin_error', {error: error});
+        res.render('admin_error', { error: error });
     });
 });
 

@@ -22,14 +22,17 @@ router.post('/login', async (req, res) => {
     try {
         const resultado = await Usuario.findOne({ login: req.body.login });
         if (resultado) {
-            const passwordOk = bcrypt.compare(req.body.password, resultado.password);
+            const passwordOk = await bcrypt.compare(req.body.password, resultado.password);
             if (passwordOk) {
                 req.session.usuario = resultado;
                 res.redirect('/admin');
+            } else {
+                res.render('auth_login',
+                    { error: "Usuario o contraseña incorrectos" });
             }
         } else {
             res.render('auth_login',
-                { error: "Usuario o contraseña incorrectos" });
+                { error: "Usuario no encontrado" });
         }
     } catch (error) {
         res.render('auth_login');
