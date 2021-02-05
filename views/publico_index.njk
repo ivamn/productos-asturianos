@@ -9,15 +9,24 @@
         </div>
         <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
-    {% if productos %}
-        <ul style="list-style-type: none">
-            {% for producto in productos %}
-                <li>
-                    <a href="/producto/{{ producto.id }}">{{ producto.nombre }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <h4>No se encontraron resultados</h4>
-    {% endif %}
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Nombre</th>
+            </tr>
+        </thead>
+        {% for producto in productos %}
+            <tr>
+                <td>
+                    <a href="/producto/{{producto.id}}">{{producto.nombre}}</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td>
+                    <h4>No se encontraron resultados</h4>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

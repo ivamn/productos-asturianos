@@ -10,7 +10,11 @@ const Comentario = require(__dirname + "/../models/comentario.js");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-    res.render('publico_index');
+    Producto.find().then(resultado => {
+        res.render('publico_index', { productos: resultado });
+    }).catch(error => {
+        res.render('publico_error')
+    });
 });
 
 router.get("/buscar", (req, res) => {
@@ -21,7 +25,7 @@ router.get("/buscar", (req, res) => {
             res.render('publico_index', { error: 'No se encontraron resultados' });
         }
     }).catch(error => {
-        res.render('publico_error')
+        res.render('publico_error');
     });
 });
 
