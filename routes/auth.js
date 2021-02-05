@@ -13,6 +13,11 @@ router.get("/login", (req, res) => {
     res.render('auth_login');
 });
 
+router.get('/logout', (req, res) => {
+    req.session.destroy();
+    res.redirect('/');
+});
+
 router.post('/login', async (req, res) => {
     try {
         const resultado = await Usuario.findOne({ login: req.body.login });
@@ -29,11 +34,6 @@ router.post('/login', async (req, res) => {
     } catch (error) {
         res.render('auth_login');
     }
-});
-
-router.get('/logout', (req, res) => {
-    req.session.destroy();
-    res.redirect('/');
 });
 
 module.exports = router;

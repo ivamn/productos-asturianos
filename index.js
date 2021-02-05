@@ -10,7 +10,6 @@ const mongoose = require('mongoose');
 const nunjucks = require('nunjucks');
 const methodOverride = require('method-override');
 const session = require('express-session');
-const bodyParser = require('body-parser');
 
 const admin = require(__dirname + '/routes/productos');
 const publico = require(__dirname + '/routes/publico');
@@ -49,7 +48,7 @@ app.use('/public', express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
 
 app.use('/', publico);
-app.use('/admin', admin);
 app.use('/auth', auth);
+app.use('/admin', admin);
 
 app.listen(8080);
